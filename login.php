@@ -5,20 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
-    <!-- Bootstrap CSS -->
+    <!-- style -->
+    <link rel="shortcut icon" href="images/logo.png" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="custom/custom.css">
 </head>
+
 <body>
-<header>
-    <div id="header-img" style="background-image: url(images/header.jpeg);"></div>
+<!-- heading -->
+<header class="navbar-custom">
+  <div class="header-container">
+    <a class="header-brand" href="#">
+      <img src="images/header.jpeg" alt="Cleara Logo">
+    </a>
+  </div>
 </header>
 
 <?php
+// include database
 session_start();
 include("templates/conn.php");
 
-$errorMessage = "";
+$errorMessage = ""; 
 
 // Handle login form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
@@ -26,18 +34,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     $password = trim($_POST['password']);
 
     try {
+        // Query to fetch user based on email
         $stmt = $conn->prepare("SELECT * FROM user WHERE email = :email");
         $stmt->bindValue(':email', $email);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['password'])) {
-            // Set session and redirect to home
+            // Login successful, set session and redirect
             $_SESSION['user'] = $user;
-            $errorMessage = "Correct.";
             header("Location: home.php?email=" . urlencode($email));
             exit();
         } else {
+            // Incorrect credentials
             $errorMessage = "Incorrect email or password. Please try again.";
         }
     } catch (PDOException $e) {
@@ -57,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addpatient'])) {
     $time = trim($_POST['time']);
 
     try {
+        // Check if email already exists
         $checkEmailSql = "SELECT * FROM user WHERE email = :email";
         $stmt = $conn->prepare($checkEmailSql);
         $stmt->bindValue(':email', $email);
@@ -66,6 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addpatient'])) {
         if ($existingUser) {
             echo "<script>alert('An account with this email already exists.');</script>";
         } else {
+            // Insert new user into the database
             $insertSql = "INSERT INTO user (email, password, name, surname, age, medication, dosage, time) 
                           VALUES (:email, :password, :name, :surname, :age, :medication, :dosage, :time)";
             $stmt = $conn->prepare($insertSql);
@@ -91,85 +102,84 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addpatient'])) {
 ?>
 
 <div class="container mt-5">
-    <!-- Login Form -->
-    <h1>Log in</h1>
-    <form method="POST" action="login.php">
-        <input type="hidden" name="login" value="1">
-        <label for="login-email" class="form-label">Email:</label>
-        <input type="email" class="form-control" id="login-email" name="email" required><br>
+    <div class="row">
+        <!-- Login Section -->
+        <div class="col-md-6 container-custom">
+            <h1 class="text-center">Log in</h1>
+            <form method="POST" action="login.php">
+                <input type="hidden" name="login" value="1">
+                <div class="form-group">
+                    <label for="login-email">Email:</label>
+                    <input type="email" class="form-control" id="login-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password:</label>
+                    <input type="password" class="form-control" id="login-password" name="password" required>
+                </div>
 
-        <label for="login-password" class="form-label">Password:</label>
-        <input type="password" class="form-control" id="login-password" name="password" required><br>
+                <!-- Error Message -->
+                <?php if (!empty($errorMessage)): ?>
+                    <div class="alert alert-danger"><?php echo $errorMessage; ?></div>
+                <?php endif; ?>
 
-        <?php if (!empty($errorMessage)) {
-            echo "<div class='alert alert-danger'>$errorMessage</div>";
-        } ?>
+                <button type="submit" class="btn btn-outline-primary btn-block">Submit</button>
+            </form>
+        </div>
 
-        <input type="submit" value="Submit" class="btn btn-primary">
-    </form>
+        <!-- Create Account Section -->
+        <div class="col-md-6 container-custom">
+            <h1 class="text-center">Create a New Account</h1>
+            <button type="button" class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#addPatientModal">Create Account</button>
+        </div>
+    </div>
 </div>
 
-<div class="container mt-5">
-    <!-- Create Account -->
-    <h1>Create a New Account</h1>
-    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addPatientModal">Add</button>
-</div>
-
-<!-- Popup: Add Patient Information -->
+<!-- Add User Modal -->
 <div class="modal fade" id="addPatientModal" tabindex="-1" role="dialog" aria-labelledby="addPatientModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addPatientModalLabel">Create a New Account</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form method="POST" action="login.php">
                     <input type="hidden" name="addpatient" value="1">
-
                     <div class="form-group">
                         <label for="create-email">Email:</label>
                         <input type="email" id="create-email" name="create-email" class="form-control" required>
                     </div>
-
                     <div class="form-group">
                         <label for="create-password">Password:</label>
                         <input type="password" id="create-password" name="create-password" class="form-control" required>
                     </div>
-
                     <div class="form-group">
                         <label for="name">Name:</label>
                         <input type="text" id="name" name="name" class="form-control" required>
                     </div>
-
                     <div class="form-group">
                         <label for="surname">Surname:</label>
                         <input type="text" id="surname" name="surname" class="form-control" required>
                     </div>
-
                     <div class="form-group">
                         <label for="age">Age:</label>
                         <input type="number" id="age" name="age" class="form-control" required>
                     </div>
-
                     <div class="form-group">
                         <label for="medication">Medication:</label>
                         <input type="text" id="medication" name="medication" class="form-control" required>
                     </div>
-
                     <div class="form-group">
                         <label for="dosage">Dosage:</label>
                         <input type="number" id="dosage" name="dosage" class="form-control" required>
                     </div>
-
                     <div class="form-group">
                         <label for="time">Time:</label>
                         <input type="time" id="time" name="time" class="form-control" required>
                     </div>
-
-                    <input type="submit" value="Add Patient" class="btn btn-outline-secondary">
+                    <button type="submit" class="btn btn-outline-secondary btn-block">Add Patient</button>
                 </form>
             </div>
         </div>

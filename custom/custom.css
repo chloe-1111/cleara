@@ -1,48 +1,217 @@
+/* Header Styles (like navbar) */
+  .header-container {
+    display: flex;
+    align-items: center;
+    background-color: #246473; /* Match navbar background */
+    padding: 1rem; /* Add spacing */
+    width: 100%;
+  }
+
+  .header-brand img {
+    height: 50px; /* Adjust the size of the logo */
+    margin-left: 15px; /* Add some spacing to the left */
+  }
+
+  .header-container {
+    justify-content: flex-start; /* Align logo to the left */
+  }
 
 
-/* Header */
-#header-img {
-  width: 100%;
-  background-size: cover; 
-  background-position: center; 
-  height: 180px;
-}
+/* Headings and Body */
+  h1 {
+    font-size: 2.4rem; /* Large and bold */
+    font-weight: 500; /* Modern strong weight */
+    color: #246473; /* Primary color */
+    letter-spacing: 0.5px; /* Minimal letter spacing for refinement */
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 
-/* Headings and body */
-h1 {
-  font-size: 40px !important;
-  font-weight: 100 !important;
-  color: #246473;
-  padding-top: 30px;
-  padding-bottom: 20px;
-  
-}
+  body {
+    background-color: #ffffff; /* Clean background */
+  }
 
-body {
-  background-color: #ffffff !important;  
-}
 
+/* Full-width Navbar */
+  .navbar-custom {
+    background-color: #246473;
+    border-bottom: 2px solid #1b4b56;
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .navbar-custom .navbar-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    width: 100%;
+  }
+
+  .navbar-custom .navbar-brand img {
+    height: 50px;
+    margin-left: 15px; 
+  }
+
+  .navbar-custom .navbar-brand,
+  .navbar-custom .nav-link {
+    color: #ffffff !important;
+  }
+
+  .navbar-custom .nav-link {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .navbar-custom .nav-link:hover {
+    color: #d1edf2 !important;
+  }
+
+  .navbar-collapse {
+    justify-content: flex-end; 
+  }
+
+
+/* Custom Toggler Button */
+  .navbar-toggler {
+    border: none;
+    background: none;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .navbar-toggler span {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: #ffffff;
+    margin: 5px 0;
+    border-radius: 2px;
+  }
+
+  .navbar-toggler:hover span {
+    background-color: #d1edf2;
+  }
+
+/* Containers and Cards */
+  .container-custom {
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  }
+
+  .card {
+    background-color: #f9f9f9;
+    border: 1px solid #d1edf2;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-title {
+    color: #246473;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+/* Buttons */
+  .btn-outline-primary,
+  .btn-outline-secondary {
+    color: #246473;
+    border-color: #246473;
+  }
+
+  .btn-outline-primary:hover,
+  .btn-outline-secondary:hover {
+    background-color: #246473;
+    color: white;
+  }
+
+/* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  table th,
+  table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #d6eaed; /* Subtle table borders */
+  }
+
+  table th {
+    color: #333333;
+    font-weight: bold;
+  }
+
+  table td {
+    color: #333333;
+  }
+
+/* Modals */
+  .modal-header {
+    background-color: #246473;
+    color: white;
+  }
+
+  .modal-content {
+    border-radius: 8px;
+  }
+
+/* Forms */
+  .form-control {
+    border: 1px solid #246473;
+    border-radius: 4px;
+  }
+
+/* Progress Container */
+  #progress-container {
+    margin-top: 20px;
+  }
+
+/* Tips container for cards */
 #tips-container {
-  margin: 0 auto; /* Center the container horizontally */
-  max-width: 70%; /* Restrict the width to match other sections */
-  padding: 0; /* Remove internal padding to match the table */
-  background-color: transparent; /* Remove the light background */
+  margin: 0; /* Align with other sections */
+  padding: 0; /* No extra padding */
 }
 
-/* Tips table */
-#tips-container table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
+/* Individual cards */
+.card {
+  border: 1px solid #ddd; /* Subtle border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  background-color: #ffffff; /* White background */
 }
 
-#tips-container th, #tips-container td {
-  border: 1px solid #ddd;
-  padding: 20px; /* Consistent padding */
+/* Card header */
+.card-header {
+  background-color: #246473; /* Match primary color scheme */
+  color: #ffffff; /* White text for contrast */
+  font-weight: bold; /* Emphasize the heading */
+  font-size: 16px; /* Consistent font size */
+  padding: 10px;
+  border-top-left-radius: 8px; /* Ensure rounded corners match card */
+  border-top-right-radius: 8px;
 }
 
-#tips-container th {
-  background-color: #f4f4f4;
-  text-align: left;
-  font-weight: bold;
+/* Card body */
+.card-body ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; /* Remove bullet points */
+}
+
+.card-body li {
+  padding: 5px 0;
+  font-size: 14px; /* Adjust font size for readability */
+  color: #333; /* Darker text for better contrast */
+}
+
+/* Success icon styling */
+.card-body .fa-check-circle {
+  margin-right: 8px;
+  color: #06D6A0; /* Match your site's accent color */
 }

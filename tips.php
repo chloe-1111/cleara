@@ -52,32 +52,28 @@ foreach ($symptoms as $entry) {
 }
 ?>
 
-<div id="tips-container">
-    <h1>Health Tips Based on Today's Symptoms</h1>
-    <?php if (!empty($displayTips)) : ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>Symptom</th>
-                    <th>Tips</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($displayTips as $symptom => $tips) : ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($symptom); ?></td>
-                        <td>
-                            <ul>
+<div class="container mt-5">
+    <h1 class="mb-4">Health Tips Based on Today's Symptoms</h1>
+    <div id="tips-container" class="row">
+        <?php if (!empty($displayTips)) : ?>
+            <?php foreach ($displayTips as $symptom => $tips) : ?>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <?php echo htmlspecialchars($symptom); ?>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
                                 <?php foreach ($tips as $tip) : ?>
-                                    <li><?php echo htmlspecialchars($tip); ?></li>
+                                    <li><i class="fas fa-check-circle"></i> <?php echo htmlspecialchars($tip); ?></li>
                                 <?php endforeach; ?>
                             </ul>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php else : ?>
-        <p>No symptoms recorded for today. Add some to receive tips!</p>
-    <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <p class="text-center text-muted col-12">No symptoms recorded for today. Add some to receive tips!</p>
+        <?php endif; ?>
+    </div>
 </div>
