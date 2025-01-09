@@ -22,3 +22,27 @@ body {
   background-color: #ffffff !important;  
 }
 
+#tips-container {
+  margin: 0 auto; /* Center the container horizontally */
+  max-width: 70%; /* Restrict the width to match other sections */
+  padding: 0; /* Remove internal padding to match the table */
+  background-color: transparent; /* Remove the light background */
+}
+
+/* Tips table */
+#tips-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+#tips-container th, #tips-container td {
+  border: 1px solid #ddd;
+  padding: 20px; /* Consistent padding */
+}
+
+#tips-container th {
+  background-color: #f4f4f4;
+  text-align: left;
+  font-weight: bold;
+}

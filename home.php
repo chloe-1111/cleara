@@ -67,6 +67,7 @@
 	<?php
 		include( "tracking.php" );
 	?>
+<?php include 'tips.php'; ?>
 
 	<!--container 4: medicine-->
 	<?php
