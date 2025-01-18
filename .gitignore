@@ -1,0 +1,22 @@
+# Dependency directories
+/vendor/
+node_modules/
+
+# Composer files
+composer.lock
+
+# Environment variables
+.env
+
+# Log files
+*.log
+
+# IDE and OS files
+*.idea/
+*.vscode/
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.swp
