@@ -2,7 +2,7 @@
 ## Overview 
 Cleara is a web application designed specifically for individuals with acne. It serves as a comprehensive tool to assist individuals in effectively tracking and managing the side effects of medication treatments for acne. The application empowers users by providing personalized recommendations and visual tools to monitor their progress.
 
-## Accessing the App
+## Running the App
 ### Deployed App
 
 The application has been deployed using Amazon Web Services (AWS).
